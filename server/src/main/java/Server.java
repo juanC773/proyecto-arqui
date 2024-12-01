@@ -1,46 +1,28 @@
-import java.io.*;
-
+import Demo.Response;
 
 public class Server
 {
     public static void main(String[] args)
     {
-        java.util.List<String> extraArgs = new java.util.ArrayList<String>();
+        java.util.List<String> extraArgs = new java.util.ArrayList<>();
 
-        try(com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args,"config.server",extraArgs))
+        try(com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args, extraArgs))
         {
             if(!extraArgs.isEmpty())
             {
                 System.err.println("too many arguments");
-                for(String v:extraArgs){
+                for(String v : extraArgs)
+                {
                     System.out.println(v);
                 }
             }
-            com.zeroc.Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Printer");
+
+            // Configura el adaptador replicado gestionado por IceGrid
+            com.zeroc.Ice.ObjectAdapter adapter = communicator.createObjectAdapter("VotosAdapter");
             com.zeroc.Ice.Object object = new PrinterI();
-            adapter.add(object, com.zeroc.Ice.Util.stringToIdentity("SimplePrinter"));
+            adapter.add(object, com.zeroc.Ice.Util.stringToIdentity("votos"));
             adapter.activate();
             communicator.waitForShutdown();
         }
     }
-
-    public static void f(String m)
-    {
-        String str = null, output = "";
-
-        InputStream s;
-        BufferedReader r;
-
-        try {
-            Process p = Runtime.getRuntime().exec(m);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream())); 
-            while ((str = br.readLine()) != null) 
-            output += str + System.getProperty("line.separator"); 
-            br.close(); 
-        }
-        catch(Exception ex) {
-        }
-    }
-
 }

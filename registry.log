@@ -1,0 +1,3 @@
+!! 12/01/24 00:24:00.775 C:/Program Files/ZeroC/Ice-3.7.10/bin/icegridregistry.exe: error: property `IceGrid.Registry.LMDB.Path' is set to an invalid path:
+   ..\..\RegistryI.cpp:357: ::Ice::SyscallException:
+   syscall exception: El sistema no puede encontrar la ruta especificada.

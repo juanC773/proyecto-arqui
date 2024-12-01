@@ -8,3 +8,9 @@ Printer.Endpoints=tcp -p 9099
 # Only listen on the ZeroTier's LIASOn1 interface by default.
 #
 Ice.Default.Host=localhost
+# Configuración del servidor gestionada por IceGrid
+Ice.Default.Locator=DemoIceGrid/Locator:default -h localhost -p 4061
+Ice.LogFile=server.log
+
+# Configuración del adaptador VotosAdapter
+VotosAdapter.Endpoints=tcp -h localhost -p 10001

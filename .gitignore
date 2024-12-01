@@ -3,6 +3,6 @@
 .vscode
 .settings
 .project
-
+db/
 # Ignore Gradle build output directory
 build

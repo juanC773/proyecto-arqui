@@ -1,0 +1,27 @@
+<icegrid>
+    <application name="ProyectoArqui">
+        <!-- Configuración del adaptador replicado -->
+        <adapter name="VotosAdapter" replicas="3">
+            <endpoint>tcp -h localhost -p 10001</endpoint>
+            <endpoint>tcp -h localhost -p 10002</endpoint>
+            <endpoint>tcp -h localhost -p 10003</endpoint>
+        </adapter>
+
+        <!-- Configuración del servidor con adaptadores replicados -->
+        <server-template id="VotosServerTemplate">
+            <parameter name="index"/>
+            <server id="VotosServer-${index}" exe="java" activation="always">
+                <option>-jar</option>
+                <option>../server/build/libs/server.jar</option>
+                <adapter-instance adapter="VotosAdapter"/>
+            </server>
+        </server-template>
+
+        <!-- Configuración del nodo con instancias del servidor -->
+        <node name="node1">
+            <server-instance template="VotosServerTemplate" index="1"/>
+            <server-instance template="VotosServerTemplate" index="2"/>
+            <server-instance template="VotosServerTemplate" index="3"/>
+        </node>
+    </application>
+</icegrid>
