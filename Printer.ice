@@ -1,11 +1,17 @@
-module Demo
-{
-    class Response{
+module Demo {
+    class Response {
         long responseTime;
         string value;
     }
-    interface Printer
-    {
+    interface Observer {
+        void notify(string message, string eventType);
+    }
+    interface Subject {
+        void attach(Observer* observer);
+        void detach(Observer* observer);
+        void notifyObservers(string message, string eventType);
+    }
+    interface Printer {
         Response printString(string s);
     }
 }

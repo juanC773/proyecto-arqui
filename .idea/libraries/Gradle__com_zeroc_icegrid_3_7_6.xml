@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.zeroc:icegrid:3.7.6" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.zeroc" artifactId="icegrid" version="3.7.6" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zeroc/icegrid/3.7.6/d9a77e04e3dd7763805862ed693e012d6395054/icegrid-3.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.zeroc:glacier2:3.7.6" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.zeroc" artifactId="glacier2" version="3.7.6" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zeroc/glacier2/3.7.6/69721b97ac6eda0e93ab9de9390790ec6fdd3cc2/glacier2-3.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

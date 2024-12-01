@@ -19,6 +19,8 @@ public class Server
             com.zeroc.Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Printer");
             com.zeroc.Ice.Object object = new PrinterI();
             adapter.add(object, com.zeroc.Ice.Util.stringToIdentity("SimplePrinter"));
+            com.zeroc.Ice.Object subject = new SubjectI();
+            adapter.add(subject, com.zeroc.Ice.Util.stringToIdentity("subject"));
             adapter.activate();
             communicator.waitForShutdown();
         }
