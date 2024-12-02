@@ -1,6 +1,3 @@
-import java.io.*;
-
-
 public class Server
 {
     public static void main(String[] args)
@@ -21,25 +18,10 @@ public class Server
             adapter.add(object, com.zeroc.Ice.Util.stringToIdentity("SimplePrinter"));
             adapter.activate();
             communicator.waitForShutdown();
-        }
-    }
+        } catch (Exception e){
 
-    public static void f(String m)
-    {
-        String str = null, output = "";
+        } finally {
 
-        InputStream s;
-        BufferedReader r;
-
-        try {
-            Process p = Runtime.getRuntime().exec(m);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream())); 
-            while ((str = br.readLine()) != null) 
-            output += str + System.getProperty("line.separator"); 
-            br.close(); 
-        }
-        catch(Exception ex) {
         }
     }
 

@@ -1,10 +1,14 @@
+import Demo.CallbackPrx;
 import Demo.Response;
+
+import com.zeroc.Ice.Current;
 
 public class PrinterI implements Demo.Printer
 {
-    public Response printString(String s, com.zeroc.Ice.Current current)
-    {
+    public void printString(String s, CallbackPrx callback, com.zeroc.Ice.Current current){
         System.out.println(s);
-        return new Response(0, "Server response: " + s);
+        callback.reportResponse(new Response(0, "Server response: " + s));
     }
+
 }
+

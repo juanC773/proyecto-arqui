@@ -1,4 +1,8 @@
+import com.zeroc.Ice.ObjectAdapter;
+import com.zeroc.Ice.ObjectPrx;
+
 import Demo.Response;
+import com.zeroc.Ice.Util;
 
 public class Client
 {
@@ -8,18 +12,21 @@ public class Client
 
         try(com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize(args,"config.client",extraArgs))
         {
-            //com.zeroc.Ice.ObjectPrx base = communicator.stringToProxy("SimplePrinter:default -p 10000");
-            Response response = null;
             Demo.PrinterPrx service = Demo.PrinterPrx
                     .checkedCast(communicator.propertyToProxy("Printer.Proxy"));
+            
+            ObjectAdapter adapter = communicator.createObjectAdapter("callback");
+            Demo.Callback callback = new MyCallback();
+            ObjectPrx prx = adapter.add(callback, Util.stringToIdentity("callback"));
+            Demo.CallbackPrx callbackPrx = Demo.CallbackPrx.checkedCast(prx);
+            adapter.activate();
             
             if(service == null)
             {
                 throw new Error("Invalid proxy");
             }
-            response = service.printString("Hello World from a remote client!");
+            service.printString("Hello World from a remote client!", callbackPrx);
 
-            System.out.println("Respuesta del server: " + response.value + ", " + response.responseTime);
         }
     }
 }

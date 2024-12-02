@@ -8,3 +8,10 @@ Printer.Endpoints=tcp -p 9099
 # Only listen on the ZeroTier's LIASOn1 interface by default.
 #
 Ice.Default.Host=localhost
+
+# ThreadPool configuration
+Ice.ThreadPool.Server.Size=10
+Ice.ThreadPool.Server.SizeMax=16
+Ice.ThreadPool.Server.SizeWarn=14
+Ice.ThreadPool.Server.StackSize=262144
+Ice.ThreadPool.Server.Serialize=0
