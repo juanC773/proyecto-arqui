@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.ObjectPrx;
 
@@ -6,6 +12,7 @@ import com.zeroc.Ice.Util;
 
 public class Client
 {
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(10);
     public static void main(String[] args)
     {
         java.util.List<String> extraArgs = new java.util.ArrayList<>();
@@ -25,7 +32,27 @@ public class Client
             {
                 throw new Error("Invalid proxy");
             }
-            service.printString("Hello World from a remote client!", callbackPrx);
+            
+            try {
+                String path = "..\\resources\\cedulas.txt";
+                //String path = "../resources/cedulas.txt";
+                BufferedReader reader = new BufferedReader(new FileReader(path));
+                String cedula;
+                while ((cedula = reader.readLine()) != null) { 
+                    final String cedulaFinal = cedula;                   
+                    // Send the request asynchronously
+                    CompletableFuture.runAsync(() -> {
+                        try {
+                            service.printString( System.getProperty("user.name") + " " + cedulaFinal, callbackPrx);
+                        } catch (Exception e) {
+                            System.err.println("Error sending request: " + e.getMessage());
+                        }
+                    }, executorService);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //service.printString("Hello World from a remote client!", callbackPrx);
 
         }
     }
